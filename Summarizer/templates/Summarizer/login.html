@@ -1,0 +1,18 @@
+{% extends 'index.html'%}
+
+{% block label %}
+<h1  class="intro-lead-in" >Log In</h1>
+ <form action="" method="post">
+    {% csrf_token %}
+
+    {% if error %}<legend >{{ error }}</legend><br>{% endif %}
+
+        <fieldset>
+           {{ form }}
+
+        </fieldset>
+        <button type="submit">Log In</button>
+      </form>
+{% endblock %}
+{% block body %}
+{% endblock %}

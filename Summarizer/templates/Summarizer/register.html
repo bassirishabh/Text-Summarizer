@@ -1,0 +1,29 @@
+{% extends 'index.html'%}
+{% block label %}
+ <h1  class="intro-lead-in" >Register</h1>
+ <form action="" method="post">
+    {% csrf_token %}
+
+    <!--{{ form.non_field_errors }}-->
+    {% if error %}<legend >{{ error }}</legend><br>{% endif %}
+
+        <fieldset>
+           {{ form }}
+    <!--{% if passw %}-->
+            <!--<legend >{{ error }}</legend><br>-->
+    <!--{% endif %}-->
+            <!--{{ form.non_field_errors }}-->
+    <!--{% if form.errors %}-->
+   <!--{% for field in form %}-->
+      <!--<div class="error_message">-->
+           <!--{{ field.errors }}-->
+      <!--</div>-->
+   <!--{% endfor %}-->
+<!--{% endif %}-->
+        </fieldset>
+        <button type="submit">Sign Up</button>
+      </form>
+{% endblock%}
+
+{% block body %}
+{% endblock %}

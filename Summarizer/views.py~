@@ -1,0 +1,74 @@
+import os
+from wsgiref.util import FileWrapper
+from django.http import HttpResponse, Http404
+
+from django.shortcuts import render,HttpResponse,redirect
+from django.utils.encoding import smart_str
+
+from .forms import getFileModel
+from .models import getFile
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+import os
+
+
+def home(request):
+    return render(request,'Summarizer/index.html')
+
+def form(request):
+    if request.method=='POST':
+        form=getFileModel(request.POST,request.FILES)
+        if form.is_valid():
+            file=request.FILES['file']
+            obj = getFile()  # gets new object
+            obj.name = form.cleaned_data['name']
+            obj.email = form.cleaned_data['email']
+            obj.file = form.cleaned_data['file']
+            obj.length = form.cleaned_data['length']
+
+            # finally save the object in db
+            obj.save()
+            print("id",obj.id)
+            dire=str(obj.id)
+            count = str(obj.length)
+            path = settings.MEDIA_ROOT
+            old_path=path+'/'+str(obj.file.name)
+            new_path=path+'/'+dire
+            os.mkdir(new_path)
+            new_path=new_path+'/'+str(obj.file.name)
+            os.rename(old_path,new_path)
+            fs = FileSystemStorage()
+            filename = fs.save(file.name, file)
+            uploaded_file_url = fs.url(filename)
+            path_name = os.path.join(path, filename)
+	    os.system('python3 summary.py '+count+" "+dire+" "+filename)
+            #f = open(path_name, 'r')
+            #   print(l)
+            return redirect('/Summarizer/detail/')
+    else :
+        form=getFileModel()
+    return render(request,'Summarizer/form.html',{'form':form})
+
+def detail(request):
+    all_files=getFile.objects.all()
+    path=settings.MEDIA_ROOT
+    print(path)
+    context={
+        'path':path,
+        'files':all_files
+    }
+    print(all_files)
+    return render(request,'Summarizer/detail.html',context)
+
+
+
+def download(reques,file):
+    file_name = getFile.objects.get(file=file)
+    path = settings.MEDIA_ROOT
+    path_name = os.path.join(path, file)
+    print(file_name)
+    path_to_file = "/media/{0}".format(file_name)
+    response = HttpResponse(open(path_name, "rb"),content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+    response['X-Sendfile'] = smart_str(path_to_file)
+    return response

@@ -1,0 +1,82 @@
+{%load static%}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Text Summarizer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/agency.min.css'%}" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{%url 'home' %}">Text Summarizer</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Welcome To Our Studio!</div>
+          <div class="container-fluid text-center">
+          <div class="form-group">
+            <div class="col-sm-12 text-left">
+                <p class="intro-lead-in">Here You Can Get Summary of all the items you need.</p>
+                <hr>
+                <form action="" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{form|crispy}}
+                <input class="btn btn-default" type="submit" value="Get Summary">
+                </form>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="{% static 'js/jqBootstrapValidation.js'%}"></script>
+    <script src="{% static 'js/contact_me.js'%}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'js/agency.min.js'%}"></script>
+
+  </body>
+
+</html>
