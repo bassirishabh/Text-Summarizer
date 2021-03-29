@@ -57,7 +57,7 @@ plotly==2.2.3
 prompt-toolkit==1.0.15
 protobuf==3.5.1
 ptyprocess==0.5.2
-Pygments==2.2.0
+Pygments==2.7.4
 PyJWT==1.5.3
 pyparsing==2.2.0
 PyPDF2==1.26.0
