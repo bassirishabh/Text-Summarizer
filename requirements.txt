@@ -12,7 +12,7 @@ colorlover==0.2.1
 cufflinks==0.12.1
 cycler==0.10.0
 decorator==4.1.2
-Django==1.11.7
+Django==2.2.24
 django-ajax-selects==1.6.1
 django-crispy-forms==1.7.0
 django-smtp-ssl==1.0
